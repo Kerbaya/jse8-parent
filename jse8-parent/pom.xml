@@ -1,0 +1,107 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+<modelVersion>4.0.0</modelVersion>
+
+<parent>
+	<groupId>com.kerbaya</groupId>
+	<artifactId>plugins-parent</artifactId>
+	<version>1</version>
+	<relativePath />
+</parent>
+
+<groupId>com.kerbaya</groupId>
+<artifactId>jse8-parent</artifactId>
+<version>1-SNAPSHOT</version>
+
+<packaging>pom</packaging>
+
+<properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
+
+<build>
+	<pluginManagement>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<showWarnings>true</showWarnings>
+					<failOnWarning>true</failOnWarning>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<failOnWarnings>true</failOnWarnings>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<trimStackTrace>false</trimStackTrace>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<trimStackTrace>false</trimStackTrace>
+				</configuration>
+			</plugin>
+		</plugins>
+	</pluginManagement>
+	<plugins>
+		<plugin>
+			<artifactId>maven-enforcer-plugin</artifactId>
+			<executions>
+				<execution>
+					<id>ban-jse8-included</id>
+					<goals>
+						<goal>enforce</goal>
+					</goals>
+					<configuration>
+						<rules>
+							<bannedDependencies>
+								<!--
+								We'll mark some well-known artifact coordinates that are covered 
+								in JSE8 as banned, to prevent their inclusion in deployments, compiling, 
+								and tests 
+								-->
+								<excludes>
+									<!-- JAX-P 1.6 -->
+									<exclude>xml-apis:xml-apis:(,1.7)</exclude>
+									<exclude>javax.xml:jaxp-api:(,1.7)</exclude>
+									<exclude>javax.xml.parsers:jaxp-api:(,1.7)</exclude>
+
+									<!-- JAX-B 2.2 -->
+									<exclude>javax.xml:jaxb-api:(,2.3)</exclude>
+									<exclude>javax.xml.bind:jaxb-api:(,2.3)</exclude>
+
+									<!-- JAX-WS 2.2 -->
+									<exclude>javax.xml:jaxws-api:(,2.3)</exclude>
+									<exclude>javax.xml.ws:jaxws-api:(,2.3)</exclude>
+
+									<!-- Activation 1.1 -->
+									<exclude>javax.activation:activation:(,1.2)</exclude>
+									<exclude>javax.xml.bind:activation:(,1.2)</exclude>
+									<exclude>javax.activation:javax.activation-api:(,1.2)</exclude>
+
+									<!-- StAX 1.0 -->
+									<exclude>javax.xml.stream:stax-api:(,1.1)</exclude>
+									<exclude>stax:stax-api:(,1.1)</exclude>
+									<exclude>org.apache.geronimo.specs:geronimo-stax-api_1.0_spec:(,1.1)</exclude>
+								</excludes>
+								<message>You must exclude JSE8-included dependencies</message>
+							</bannedDependencies>
+						</rules>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+</build>
+
+</project>
