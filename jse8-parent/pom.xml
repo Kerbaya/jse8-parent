@@ -25,6 +25,7 @@
 	<pluginManagement>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<source>1.8</source>
@@ -34,18 +35,21 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<configuration>
 					<failOnWarnings>true</failOnWarnings>
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<trimStackTrace>false</trimStackTrace>
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<configuration>
 					<trimStackTrace>false</trimStackTrace>
@@ -55,6 +59,7 @@
 	</pluginManagement>
 	<plugins>
 		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-enforcer-plugin</artifactId>
 			<executions>
 				<execution>
@@ -66,9 +71,9 @@
 						<rules>
 							<bannedDependencies>
 								<!--
-								We'll mark some well-known artifact coordinates that are covered 
-								in JSE8 as banned, to prevent their inclusion in deployments, compiling, 
-								and tests 
+								We'll mark some well-known artifact coordinates that are covered in 
+								JSE8 as banned, to prevent their inclusion in deployments,
+								compiling, and tests 
 								-->
 								<excludes>
 									<!-- JAX-P 1.6 -->
